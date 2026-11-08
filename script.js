@@ -64,7 +64,8 @@ if (adminBtn) {
         auth.signInWithPopup(provider)
             .then((result) => {
                 localStorage.setItem('isAdminLoggedIn', 'true');
-                localStorage.setItem('adminEmail', result.user.email);
+                // Menyimpan nama akun Google, jika tidak ada pakai fallback "Admin"
+                localStorage.setItem('adminName', result.user.displayName || 'Admin');
                 window.location.href = 'dashboard.html';
             })
             .catch((error) => {
@@ -103,9 +104,10 @@ if (window.location.pathname.includes('dashboard.html')) {
         window.location.href = 'index.html';
     }
 
+    // Menampilkan Nama Akun Google di Dashboard (bukan email)
     const emailDisplay = document.getElementById('adminEmailDisplay');
     if (emailDisplay) {
-        emailDisplay.innerText = localStorage.getItem('adminEmail') || 'Admin';
+        emailDisplay.innerText = localStorage.getItem('adminName') || 'Admin';
     }
 
     function loadTableData() {
@@ -155,7 +157,7 @@ if (window.location.pathname.includes('dashboard.html')) {
         if (confirm('Apakah Anda yakin ingin logout dari halaman admin?')) {
             auth.signOut().then(() => {
                 localStorage.removeItem('isAdminLoggedIn');
-                localStorage.removeItem('adminEmail');
+                localStorage.removeItem('adminName');
                 window.location.href = 'index.html';
             });
         }
