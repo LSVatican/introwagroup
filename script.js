@@ -13,7 +13,7 @@ if (!firebase.apps.length) {
 }
 
 const auth = firebase.auth();
-const db = firebase.firestore(); // Inisialisasi Firestore Database
+const db = firebase.firestore();
 const ADMIN_PIN = "507090";
 
 // --- LOGIKA HALAMAN UTAMA (index.html) ---
@@ -73,7 +73,6 @@ if (adminBtn) {
             });
     });
 
-    // Submit Formulir Intro (Disimpan ke Cloud Firestore agar masuk ke semua browser)
     const introForm = document.getElementById('introForm');
     if (introForm) {
         introForm.addEventListener('submit', function(e) {
@@ -115,7 +114,6 @@ if (window.location.pathname.includes('dashboard.html')) {
 
     const tableBody = document.getElementById('tableBody');
 
-    // Mengambil data secara real-time dari Firestore Database
     db.collection("intros").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
         if (!snapshot.empty) {
             tableBody.innerHTML = '';
@@ -146,7 +144,6 @@ if (window.location.pathname.includes('dashboard.html')) {
         }
     });
 
-    // Fungsi Hapus Satuan Data Intro dari Database Cloud
     window.deleteIntro = function(docId) {
         if (confirm('Apakah Anda yakin ingin menghapus data intro ini?')) {
             db.collection("intros").doc(docId).delete().catch((error) => {

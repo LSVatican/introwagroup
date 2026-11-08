@@ -6,12 +6,10 @@
     <title>Intro WA Group</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome untuk Icon Google & Mata -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Tombol Admin di Pojok Kanan Atas -->
     <button id="adminBtn" class="btn-admin-trigger" title="Login Admin">
         <i class="fa-solid fa-lock"></i> Admin
     </button>
@@ -65,12 +63,13 @@
                 <textarea id="tujuan" rows="3" placeholder="Alasan gabung ke grup ini..." required></textarea>
             </div>
 
-            <button type="submit" class="btn-submit">Kirim</button>
+            <button type="submit" class="btn-submit">Kirim Intro</button>
         </form>
+
         <div class="watermark">Created by Daus Dopo</div>
     </div>
 
-    <!-- MODAL POP-UP PIN ADMIN -->
+    <!-- MODAL POP-UP PIN ADMIN (Menggunakan Keyboard Angka) -->
     <div id="pinModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closePinModal">&times;</span>
@@ -78,7 +77,8 @@
             <p>Masukkan PIN khusus admin untuk melanjutkan.</p>
             
             <div class="pin-input-wrapper">
-                <input type="password" id="adminPinInput" placeholder="Masukkan PIN Admin">
+                <!-- inputmode="numeric" dan pattern="[0-9]*" memastikan keyboard HP memunculkan angka -->
+                <input type="password" id="adminPinInput" inputmode="numeric" pattern="[0-9]*" placeholder="Masukkan PIN Angka">
                 <i class="fa-solid fa-eye" id="togglePin" style="cursor: pointer;"></i>
             </div>
             
@@ -104,10 +104,9 @@
         </div>
     </div>
 
-    <!-- Firebase SDK (Compat Version) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

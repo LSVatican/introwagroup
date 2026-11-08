@@ -287,7 +287,6 @@ th {
     border-radius: 4px;
 }
 
-/* Styling Watermark */
 .watermark {
     text-align: center;
     margin-top: 20px;
@@ -296,10 +295,7 @@ th {
     font-weight: 500;
 }
 
-/* Jika watermark berada di dalam card/container putih (seperti di form) */
 .form-container .watermark {
     color: #777;
     margin-top: 15px;
-    border-top: 1px solid #eee;
-    padding-top: 15px;
-}
+    border-top: 1px solid #
