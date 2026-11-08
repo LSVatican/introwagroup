@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro WA Group</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome untuk Icon Google & Mata -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Tombol Admin di Pojok Kanan Atas -->
+    <button id="adminBtn" class="btn-admin-trigger" title="Login Admin">
+        <i class="fa-solid fa-lock"></i> Admin
+    </button>
+
+    <div class="form-container">
+        <h2>Formulir Intro WA Group</h2>
+        <p class="subtitle">Silakan isi data diri kamu di bawah ini ya!</p>
+        
+        <form id="introForm">
+            <div class="input-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" placeholder="Masukkan nama kamu" required>
+            </div>
+
+            <div class="input-group">
+                <label for="umur">Umur</label>
+                <input type="number" id="umur" placeholder="Contoh: 17" required>
+            </div>
+
+            <div class="input-group">
+                <label for="kelas">Kelas</label>
+                <input type="text" id="kelas" placeholder="Contoh: XII IPA 1 / Kuliah / Kerja" required>
+            </div>
+
+            <div class="input-group">
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                    <option value="" disabled selected>Pilih gender</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="askot">Askot (Asal Kota)</label>
+                <input type="text" id="askot" placeholder="Contoh: Jakarta / Surabaya" required>
+            </div>
+
+            <div class="input-group">
+                <label for="hobby">Hobby</label>
+                <input type="text" id="hobby" placeholder="Contoh: Membaca, Main Game" required>
+            </div>
+
+            <div class="input-group">
+                <label for="citacita">Cita-cita</label>
+                <input type="text" id="citacita" placeholder="Contoh: Software Engineer, Dokter" required>
+            </div>
+
+            <div class="input-group">
+                <label for="tujuan">Tujuan Masuk</label>
+                <textarea id="tujuan" rows="3" placeholder="Alasan gabung ke grup ini..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Kirim Intro</button>
+        </form>
+    </div>
+
+    <!-- MODAL POP-UP PIN ADMIN -->
+    <div id="pinModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closePinModal">&times;</span>
+            <h3>Verifikasi Admin</h3>
+            <p>Masukkan PIN khusus admin untuk melanjutkan.</p>
+            
+            <div class="pin-input-wrapper">
+                <input type="password" id="adminPinInput" placeholder="Masukkan PIN Admin">
+                <i class="fa-solid fa-eye" id="togglePin" style="cursor: pointer;"></i>
+            </div>
+            
+            <button id="submitPinBtn" class="btn-action">Lanjutkan</button>
+        </div>
+    </div>
+
+    <!-- MODAL POP-UP GOOGLE LOGIN & CENTANG ADMIN -->
+    <div id="googleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeGoogleModal">&times;</span>
+            <h3>Login Google Admin</h3>
+            <p>Konfirmasi identitas Anda sebelum masuk ke dashboard.</p>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="confirmAdminCheck">
+                <label for="confirmAdminCheck">Saya benar-benar seorang admin yang sah.</label>
+            </div>
+
+            <button id="googleLoginBtn" class="btn-google" disabled>
+                <i class="fa-brands fa-google"></i> Login dengan Google
+            </button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Intro WA</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <header class="dashboard-header">
+        <h2>Dashboard Admin - Intro WA Group</h2>
+        <div class="admin-actions">
+            <span id="adminEmailDisplay" class="admin-email"></span>
+            <button id="logoutBtn" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            <button id="deleteAccountBtn" class="btn-danger"><i class="fa-solid fa-user-slash"></i> Hapus Akun</button>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="table-container">
+            <h3>Daftar Hasil Intro Member</h3>
+            <table id="introTable">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Umur</th>
+                        <th>Kelas</th>
+                        <th>Gender</th>
+                        <th>Askot</th>
+                        <th>Hobby</th>
+                        <th>Cita-cita</th>
+                        <th>Tujuan Masuk</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                     <tr>
+                         <td colspan="10" style="text-align: center;">Belum ada data intro yang masuk.</td>
+                     </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- MODAL KONFIRMASI HAPUS AKUN DENGAN KODE ACAK -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeDeleteModal">&times;</span>
+            <h3>Konfirmasi Hapus Akun</h3>
+            <p>Tulis ulang kode acak berikut untuk mengonfirmasi penghapusan akun:</p>
+            <div id="randomCodeBox" class="random-code-box"></div>
+            <input type="text" id="confirmCodeInput" placeholder="Masukkan kode di atas">
+            <button id="executeDeleteBtn" class="btn-danger" style="width:100%; margin-top:10px;">Konfirmasi Hapus</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
