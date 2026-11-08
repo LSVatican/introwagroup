@@ -298,4 +298,6 @@ th {
 .form-container .watermark {
     color: #777;
     margin-top: 15px;
-    border-top: 1px solid #
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}

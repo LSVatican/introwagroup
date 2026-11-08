@@ -63,17 +63,17 @@
                 <textarea id="tujuan" rows="3" placeholder="Alasan gabung ke grup ini..." required></textarea>
             </div>
 
-            <button type="submit" class="btn-submit">Kirim</button>
+            <button type="submit" class="btn-submit">Kirim Intro</button>
         </form>
 
         <div class="watermark">
-    Created by Daus Dopo <br>
-    <a href="privacy.html" style="color: #666; font-size: 11px; text-decoration: none; margin-right: 10px;">Kebijakan Privasi</a> | 
-    <a href="terms.html" style="color: #666; font-size: 11px; text-decoration: none; margin-left: 10px;">Ketentuan Layanan</a>
-</div>
+            Created by Daus Dopo <br>
+            <a href="privacy.html" style="color: #666; font-size: 11px; text-decoration: none; margin-right: 5px;">Kebijakan Privasi</a> | 
+            <a href="terms.html" style="color: #666; font-size: 11px; text-decoration: none; margin-left: 5px;">Ketentuan Layanan</a>
+        </div>
     </div>
 
-    <!-- MODAL POP-UP PIN ADMIN (Menggunakan Keyboard Angka) -->
+    <!-- MODAL POP-UP PIN ADMIN -->
     <div id="pinModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closePinModal">&times;</span>
@@ -81,7 +81,6 @@
             <p>Masukkan PIN khusus admin untuk melanjutkan.</p>
             
             <div class="pin-input-wrapper">
-                <!-- inputmode="numeric" dan pattern="[0-9]*" memastikan keyboard HP memunculkan angka -->
                 <input type="password" id="adminPinInput" inputmode="numeric" pattern="[0-9]*" placeholder="Masukkan PIN Angka">
                 <i class="fa-solid fa-eye" id="togglePin" style="cursor: pointer;"></i>
             </div>
