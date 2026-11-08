@@ -13,6 +13,7 @@ if (!firebase.apps.length) {
 }
 
 const auth = firebase.auth();
+const db = firebase.firestore(); // Inisialisasi Firestore Database
 const ADMIN_PIN = "507090";
 
 // --- LOGIKA HALAMAN UTAMA (index.html) ---
@@ -64,7 +65,6 @@ if (adminBtn) {
         auth.signInWithPopup(provider)
             .then((result) => {
                 localStorage.setItem('isAdminLoggedIn', 'true');
-                // Menyimpan nama akun Google, jika tidak ada pakai fallback "Admin"
                 localStorage.setItem('adminName', result.user.displayName || 'Admin');
                 window.location.href = 'dashboard.html';
             })
@@ -73,6 +73,7 @@ if (adminBtn) {
             });
     });
 
+    // Submit Formulir Intro (Disimpan ke Cloud Firestore agar masuk ke semua browser)
     const introForm = document.getElementById('introForm');
     if (introForm) {
         introForm.addEventListener('submit', function(e) {
@@ -85,15 +86,18 @@ if (adminBtn) {
                 askot: document.getElementById('askot').value,
                 hobby: document.getElementById('hobby').value,
                 citacita: document.getElementById('citacita').value,
-                tujuan: document.getElementById('tujuan').value
+                tujuan: document.getElementById('tujuan').value,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
             };
 
-            let listIntro = JSON.parse(localStorage.getItem('listIntro')) || [];
-            listIntro.push(introData);
-            localStorage.setItem('listIntro', JSON.stringify(listIntro));
-
-            alert('Terima kasih! Intro kamu berhasil dikirim.');
-            introForm.reset();
+            db.collection("intros").add(introData)
+                .then(() => {
+                    alert('Terima kasih! Intro kamu berhasil dikirim.');
+                    introForm.reset();
+                })
+                .catch((error) => {
+                    alert('Gagal mengirim intro: ' + error.message);
+                });
         });
     }
 }
@@ -104,21 +108,23 @@ if (window.location.pathname.includes('dashboard.html')) {
         window.location.href = 'index.html';
     }
 
-    // Menampilkan Nama Akun Google di Dashboard (bukan email)
     const emailDisplay = document.getElementById('adminEmailDisplay');
     if (emailDisplay) {
         emailDisplay.innerText = localStorage.getItem('adminName') || 'Admin';
     }
 
-    function loadTableData() {
-        const tableBody = document.getElementById('tableBody');
-        let listIntro = JSON.parse(localStorage.getItem('listIntro')) || [];
-        
-        if (listIntro.length > 0) {
+    const tableBody = document.getElementById('tableBody');
+
+    // Mengambil data secara real-time dari Firestore Database
+    db.collection("intros").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
+        if (!snapshot.empty) {
             tableBody.innerHTML = '';
-            listIntro.forEach((item, index) => {
+            let nomor = 1;
+            snapshot.forEach((doc) => {
+                const item = doc.data();
+                const docId = doc.id;
                 const row = `<tr>
-                    <td>${index + 1}</td>
+                    <td>${nomor++}</td>
                     <td>${item.nama}</td>
                     <td>${item.umur}</td>
                     <td>${item.kelas}</td>
@@ -128,7 +134,7 @@ if (window.location.pathname.includes('dashboard.html')) {
                     <td>${item.citacita || '-'}</td>
                     <td>${item.tujuan}</td>
                     <td>
-                        <button class="btn-danger btn-sm" onclick="deleteIntro(${index})">
+                        <button class="btn-danger btn-sm" onclick="deleteIntro('${docId}')">
                             <i class="fa-solid fa-trash"></i> Hapus
                         </button>
                     </td>
@@ -138,17 +144,14 @@ if (window.location.pathname.includes('dashboard.html')) {
         } else {
             tableBody.innerHTML = `<tr><td colspan="10" style="text-align: center;">Belum ada data intro yang masuk.</td></tr>`;
         }
-    }
+    });
 
-    loadTableData();
-
-    // Fungsi Hapus Satuan Data Intro
-    window.deleteIntro = function(index) {
+    // Fungsi Hapus Satuan Data Intro dari Database Cloud
+    window.deleteIntro = function(docId) {
         if (confirm('Apakah Anda yakin ingin menghapus data intro ini?')) {
-            let listIntro = JSON.parse(localStorage.getItem('listIntro')) || [];
-            listIntro.splice(index, 1);
-            localStorage.setItem('listIntro', JSON.stringify(listIntro));
-            loadTableData();
+            db.collection("intros").doc(docId).delete().catch((error) => {
+                alert('Gagal menghapus data: ' + error.message);
+            });
         }
     };
 
